@@ -125,3 +125,126 @@ type User1 = Tenant1 & Lessor1
 const tata : User1 = {firtsName: "toto", lastName: "Diaw", age: 24, email: "toto@gmail.com", password: "passer123"}
 
 console.log(`Firstname: ${tata.firtsName}, Lastname: ${tata.lastName}, age: ${tata.age}, email: ${tata.email}, password: ${tata.password}`)
+
+
+//! union type
+//Example for variable
+let password : string | number = 1234
+
+//Example for object
+type pseudoAccount = {
+    pseudo: string, 
+    password: number,
+}
+
+type gmailAccount = {
+    email: string,
+    password: string,
+}
+
+const account1 : pseudoAccount | gmailAccount = {
+    email: "toto@gmail.com",
+    password: "passer123"
+}
+
+const account2 : pseudoAccount | gmailAccount = {
+    pseudo: "John",
+    password: 1234
+}
+
+//Example for array
+const tab : (number | string)[] = [1, "jonh", 2000, "doe"]
+
+
+//! literal type
+// string literal type
+let color: "red" | "green" | "blue"
+color = "red" //valid
+// color = "yellow" //invalid
+
+// number literal type
+let age : 12 | 24 | 32
+age = 12 //valid
+// age = 23 //invalid
+
+// boolean literal type
+let isMen : true | false
+isMen = true //valid
+// isMen = "john" //invalid
+
+//! Tuples
+let myTuple : [string, number] = ["john", 24]
+let [getName, getAge] = myTuple
+// myTuple = [24, "john"] //invalid
+console.log(getName, getAge)
+
+//! Enum
+
+enum WeatherConditions {
+    sunny = "sunny",
+    cloudly = "cloudly",
+    rainy = "rainy",
+    snowy = "snowy"
+}
+
+console.log(WeatherConditions.sunny)
+
+//! accessibility level
+
+class Animals{
+    public name: string
+    public categorie: string
+    public weight: string
+    public ageAnimal: number
+    protected price: string
+    private isAnyIll: boolean
+
+    constructor(name: string, categorie: string , weight: string, ageAnimal: number, price: string, isAnyIll: boolean){
+        this.name = name
+        this.categorie = categorie
+        this.weight = weight
+        this.ageAnimal = ageAnimal
+        this.price = price
+        this.isAnyIll
+    }
+
+    getPrice(){
+        return this.price
+    }
+ 
+    getIsAnyIll(){
+        return this.isAnyIll
+    }
+
+    //? getter and setter
+    get animalName(){
+        return this.name
+    }
+    set animalName(value){
+        this.name = value
+    }
+
+}
+
+class Cats extends Animals{
+    constructor(name: string, categorie: string , weight: string, ageAnimal: number, price: string, isAnyIll: boolean){
+        super(name, categorie, weight, ageAnimal, price, isAnyIll)
+    }
+
+    displayInfos(){
+        console.log(`Neme: ${this.name}, Categorie: ${this.categorie}, 
+            weight: ${this.weight}, Age: ${this.ageAnimal}, isAnyIll: ${this.getIsAnyIll()}`)
+    }
+}
+
+//! Interfaces 
+// Example for object
+
+interface Computer{
+    mark: string,
+    ram: string,
+    disk: string,
+    readonly processor: string 
+}
+
+const myComputer: Computer = {mark: "Dell", ram: "16Go", disk: "HDD 1To"}
