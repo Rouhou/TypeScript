@@ -205,7 +205,7 @@ class Animals{
         this.weight = weight
         this.ageAnimal = ageAnimal
         this.price = price
-        this.isAnyIll
+        this.isAnyIll = isAnyIll
     }
 
     getPrice(){
@@ -239,7 +239,6 @@ class Cats extends Animals{
 
 //! Interfaces 
 // Example for object
-
 interface Computer{
     mark: string,
     ram: string,
@@ -247,4 +246,111 @@ interface Computer{
     readonly processor: string 
 }
 
-const myComputer: Computer = {mark: "Dell", ram: "16Go", disk: "HDD 1To"}
+const myComputer: Computer = {mark: "Dell", ram: "16Go", disk: "HDD 1To", processor: "Intel"}
+
+//Example for functions
+interface MathOperation{
+    (x: number, y: number): number
+}
+
+const add: MathOperation = (a, b) => a + b
+const substract: MathOperation = (a, b) => a - b
+
+console.log(add(12, 24), substract(24, 12))
+
+interface Person{
+    firstname: string,
+    lastname: string,
+    age: number,
+    sayHello() :void
+}
+
+function personInfos(person: Person){
+    console.log(`Firstname: ${person.firstname}, Lastname: ${person.lastname}, age: ${person.age}`)
+    person.sayHello
+}
+
+const person1: Person = {
+    firstname: "toto", 
+    lastname: "Diaw", 
+    age: 24,
+    sayHello(){
+        console.log("Hello from me")
+    }
+}
+
+personInfos(person1)
+//Example for class
+interface Vehicle{
+    start(): void
+    stop(): void
+}
+
+class Car implements Vehicle{
+    start(){
+        console.log("The car is start")
+    }
+    stop(){
+        console.log("The car is stop")
+    }
+}
+
+const myCar = new Car()
+myCar.start()
+myCar.stop()
+
+//! Extend interfaces from another interface
+
+interface Movie{
+    name: string,
+    price: number,
+    printInfosMovie(name:string, price:number, genre:string):string
+}
+
+interface OtherInfosOfMovie extends Movie{
+    genre: string
+    rating: string
+}
+
+const myMovie: OtherInfosOfMovie = {
+    name: "Suits",
+    price: 200,
+    genre: "action, comedie",
+    rating: "8.2",
+    printInfosMovie(name:string, price:number, genre:string):string{
+        return `Nane ${name}, Delay: ${price}, Genre: ${genre}`
+    }
+}
+
+console.log(myMovie.printInfosMovie("Suits", 2, "Action, Comedie"))
+
+
+//! Declaration merging
+// Once an interface is declared, it cannot be directly modified. However, TypeScript allows that
+// Declaration merging in TS refers to the ability to extend or augment an existing declaration
+// This can be useful when you want to add new properties or methods to an existing interface without modifying the original declaration
+
+interface Products{
+    reference: string
+    price: number
+    soldingProduct(): boolean
+}
+
+interface Products{
+    designation: string
+    soldQuantite: number
+    totalQuantite: number
+}
+
+const myProduct: Products = {
+    reference: "Lait",
+    designation: "Lt",
+    price: 2000,
+    soldQuantite: 10.5,
+    totalQuantite: 40,
+    soldingProduct(){
+        return true
+    }
+}
+
+console.log(`Reference: ${myProduct.reference}, Designation: ${myProduct.designation}, Price: ${myProduct.price}, Quantite vendue: ${myProduct.soldQuantite}, Quantite tolate: ${myProduct.totalQuantite}`)
